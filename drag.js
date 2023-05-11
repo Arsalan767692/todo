@@ -1,32 +1,31 @@
 const draggables = document.querySelectorAll(".task")
 const droppables = document.querySelectorAll(".lane")
 
-console.log('====================================');
-console.log(draggables);
-console.log('====================================');
-draggables.forEach((task) =>{
-    task.addEventListener('dragstart' , (e)=>{
-        task.classList.add( "isDragging")
+
+draggables.forEach((task) => {
+    task.addEventListener('dragstart', (e) => {
+        task.classList.add("isDragging")
 
     })
 
     task.addEventListener('dragend', (e) => {
-        task.classList.remove("isDragging")
+        task.classList.remove("isDragging");
+        store();
 
     })
 });
 
 
-droppables.forEach((zone) =>{
-    zone.addEventListener("dragover",(e)=>{
+droppables.forEach((zone) => {
+    zone.addEventListener("dragover", (e) => {
 
-        let bottomtask = insertaboveTask(zone,e.clientY);
+        let bottomtask = insertaboveTask(zone, e.clientY);
         let currentTask = document.querySelector(".isDragging");
 
-        if(!bottomtask){
+        if (!bottomtask) {
             zone.appendChild(currentTask)
-        }else{
-            zone.insertBefore(currentTask,bottomtask)
+        } else {
+            zone.insertBefore(currentTask, bottomtask)
         }
 
 
@@ -36,15 +35,15 @@ droppables.forEach((zone) =>{
 })
 
 
-insertaboveTask =(zone,mouseY)=>{
+insertaboveTask = (zone, mouseY) => {
     let ele = zone.querySelectorAll(".task:not(.isDragging)");
     let closestTask = null;
     let closestOffSet = Number.NEGATIVE_INFINITY;
 
-    ele.forEach((task)=>{
+    ele.forEach((task) => {
         let { top } = task.getBoundingClientRect();
         let offSet = mouseY - top
-        if(offSet < 0 && offSet > closestOffSet ){
+        if (offSet < 0 && offSet > closestOffSet) {
             closestOffSet = offSet;
             closestTask = task
         }
@@ -54,15 +53,25 @@ insertaboveTask =(zone,mouseY)=>{
 
 }
 
+function store() {
 
-let arr = [];
-let test = document.querySelectorAll("#todo .task");
-console.log('====================================');
-console.log(test);
-console.log('====================================');
-test.forEach((taskTest) => {
-    let task = taskTest.querySelector(".task p").innerHTML;
-    arr.push(task)
-})
+    let arr = [];
+    let test = document.querySelectorAll(".task");
+    console.log('====================================');
+    console.log(test);
+    console.log('====================================');
+    test.forEach((taskTest) => {
+        let task = taskTest.querySelector(".task p").innerHTML;
+        let state = taskTest.parentNode.id;
+        let taskObj = {
+            "task": task,
+            state: state
+        }
+        arr.push(taskObj);
+    })
+    localStorage.setItem("todoStore", JSON.stringify(arr));
 
-console.log(arr, "YY")
+    console.log(arr, "YY");
+
+}
+

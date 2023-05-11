@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="todo.js" defer></script>
+    <script src="drag.js" defer></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <form class="form" action="">
+        <input type="text" />
+        <button type="button">Add Todo +</button>
+      </form>
+      <div class="lanes">
+        <div class="lane" id="todo">
+          <h2>TODO</h2>
+          <div draggable="true" class="task">
+            <p>Hit the gym</p>
+            <div class="btn-container">
+              <button class="edit">
+                <img src="/edit.png" alt="" />
+              </button>
+              <button class="delete">
+                <img src="/bin.png" alt="" />
+              </button>
+               <button class="done" style="display: none">done</button>
+            </div>
+
+           
+          </div>
+
+        
+        </div>
+        <div class="lane" id="doing">
+          <h2>Doing</h2>
+          <p class="task" draggable="true">Hit the gym</p>
+          <p class="task" draggable="true">getting things from the market</p>
+          <p class="task" draggable="true">go through lectures</p>
+        </div>
+        <div class="lane" id="done">
+          <h2>Done</h2>
+          <p class="task" draggable="true">Hit the gym</p>
+          <p class="task" draggable="true">getting things from the market</p>
+          <p class="task" draggable="true">go through lectures</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
